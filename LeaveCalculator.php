@@ -12,12 +12,36 @@ class LeaveCalculator {
 
 public function getWeekNumber($datetime){
 
+
+    $year = new DateTime($datetime);
+    $year = $year->format('Y');
+
+    $nextYear = $year +1;
+
+    $begin = new DateTime( $year.'-04-01' );
+    $end = new DateTime( $nextYear.'-03-31' );
+
+    $interval = DateInterval::createFromDateString('1 week');
+    $period = new DatePeriod($begin, $interval, $end);
+    $weekNumberArray = array();
+
+    foreach ( $period as $key=>$dt ) {
+    array_push($weekNumberArray,$dt->format("W"));
+
+    }
+
+   // var_dump($weekNumberArray);
+
+      // echo " ".$key;
     $date = new DateTime($datetime);
     $week = $date->format("W");
 
-    echo $week-12;
+    $returnKey = array_search($week,$weekNumberArray);
 
-    return ($week-12);
+        echo $returnKey+1;
+
+    return $returnKey +1;
+    //  return $key +1;
 
 
 }
@@ -27,7 +51,7 @@ public function getWeekNumber($datetime){
       $seqSort =  $seq[$weekNumber-1];
        $daysHoliday = 25 - $seqSort;
          // echo $daysHoliday;
-
+            return $seq[]
     }
 
 }
@@ -39,5 +63,5 @@ $lC = new LeaveCalculator();
 
 $date = new DateTime();
 
-$lC->getWeekNumber($datetime = '2016/01/30');
-$lC->daysHoliday($weekNo = 6);
+$weekNumber = $lC->getWeekNumber($datetime = '2016/04/03');
+$lC->daysHoliday($weekNumber);
