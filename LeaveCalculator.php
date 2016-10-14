@@ -14,8 +14,8 @@ class LeaveCalculator
     {
 
         $formatDate = new DateTime($datetime);
-        $weekNumberArray = array_merge(range(40, 52), range(0, 39));
-        $week = intval($formatDate->format("W"));
+        $weekNumberArray = array_merge(range(40, 53), range(0, 39));
+        $week = intval($formatDate->format("W")+1);
        // echo $week;
         return $weekNumberArray[$week];
     }
